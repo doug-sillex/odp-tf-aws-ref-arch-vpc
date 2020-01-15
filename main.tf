@@ -33,7 +33,7 @@ resource "aws_route_table" "main" {
   for_each = var.route_tables
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id =  each.value["gateway"] != "internet" ? aws_internet_gateway.main.id : aws_nat_gateway.nat_gw[each.value["gateway"]].id
+    gateway_id =  aws_nat_gateway.nat_gw[each.value["gateway"]].id != "" ? aws_nat_gateway.nat_gw[each.value["gateway"]].id : aws_internet_gateway.main.id
   }
 
   tags = {
