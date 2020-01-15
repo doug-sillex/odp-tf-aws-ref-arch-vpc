@@ -51,7 +51,7 @@ resource "aws_route_table" "default" {
 
 resource "aws_route_table" "routes" {
   vpc_id = "${aws_vpc.main.id}"
-  for_each = var.subnets
+  for_each = var.route_tables
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = each.value["gateway"]
