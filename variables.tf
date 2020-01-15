@@ -33,54 +33,16 @@ variable "default_cidr" {
 variable "subnets" {
   type = map
   description = "Map of subnets"
-  default =  {
-    subnet1 = { 
-      name =  "example-vpc-private-a1"
-      cidr =  "10.0.1.0/24"
-      availability_zone = "$us_east_1a"
-    },
-    subnet2 = { 
-      name =  "example-vpc-private-a2"
-      cidr =  "10.0.2.0/24"
-      availability_zone = "us_east_1a"
-    }
-  }
 }    
 
 variable "nat_gateways" {
   type = map
   description = "Map of nat gateways"
-  default = {
-    nat-gateway-1 = { 
-      name = "private-a"
-      subnet = "example-vpc-private-a1"
-    },
-    nat-gateway-2 = { 
-      name = "private-b"
-      subnet = "example-vpc-private-a2"
-    }
-  }
 }
    
 
 variable "route_tables" {
+  type = map
   description = "Route tables"
-  default = {
-    route_table1 = {
-      name = "private-a"
-      gateway = "private-a" 
-    }
-    route_table2 = {
-      name = "private-b"
-      gateway = "private-b" 
-    }
-    route_table3 = {
-      name = "public-a"
-      gateway = "internet-default" 
-    }
-    route_table4 = {
-      name = "public-b"
-      gateway = "internet-default" 
-    }    
   }
 }   
