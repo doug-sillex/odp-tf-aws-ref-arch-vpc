@@ -69,7 +69,6 @@ resource "aws_route_table" "routes" {
 
 ## MISSING :)
 
-
 # Configure Subnets
 
 resource "aws_subnet" "main" {
