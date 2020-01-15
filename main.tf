@@ -16,6 +16,8 @@ resource "aws_vpc" "main" {
   }
 }
 
+# Setup the Internet Gateway
+
 resource "aws_internet_gateway" "main" {
   vpc_id = "${aws_vpc.main.id}"
 
@@ -27,9 +29,48 @@ resource "aws_internet_gateway" "main" {
   }
 }
 
+# Configure Route Tables
+
+## Default route table
+
+resource "aws_route_table" "default" {
+  vpc_id = "${aws_vpc.main.id}"
+  for_each = var.subnets
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.main.id}"
+  }
+
+  tags = {
+    Name = each.value["name"]
+    Terraform = "true"
+    Environment = "${var.appenv}"
+    ProjectName = "${var.project_name}"     
+  }
+}
+
+resource "aws_route_table" "routes" {
+  vpc_id = "${aws_vpc.main.id}"
+  for_each = var.subnets
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = each.value["gateway"]
+  }
+
+  tags = {
+    Name = each.value["name"]
+    Terraform = "true"
+    Environment = "${var.appenv}"
+    ProjectName = "${var.project_name}"     
+  }
+}
+
+# Route table to subnet associations
+
+## MISSING :)
 
 
-# Subnets requires a loop I believe
+# Configure Subnets
 
 resource "aws_subnet" "main" {
   vpc_id     = "${aws_vpc.main.id}"
@@ -43,6 +84,8 @@ resource "aws_subnet" "main" {
     ProjectName = "${var.project_name}"
   }
 }
+
+# Configure NAT Gateways
 
 resource "aws_eip" "nat_gw" {
   for_each = var.nat_gateways
