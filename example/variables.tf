@@ -10,6 +10,11 @@ variable "project_name" {
   default = "vpc-example"
 }
 
+variable "vpc_name" {
+  type = string
+  description = "Project name"
+  default = "vpc-example"
+}
 
 variable "appenv" {
   type = string
