@@ -72,7 +72,7 @@ resource "aws_route_table" "nat_gateway" {
 
 resource "aws_route_table_association" "main" {
   for_each = var.subnets
-  subnet_id      = aws_subnet.main[each.value["subnet"]].id
+  subnet_id      = aws_subnet.main[each.key].id
   route_table_id = each.value["route_table"] != "internet-gateway" ? aws_route_table.nat_gateway[each.value["route_table"]].id : aws_route_table.internet_gateway.id
 }
 
