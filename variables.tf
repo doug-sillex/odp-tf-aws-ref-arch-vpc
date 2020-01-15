@@ -61,19 +61,19 @@ variable "nat_gateways" {
 variable "route_tables" {
   description = "Route tables"
   default = {
-    route_table1 {
+    route_table1 = {
       name = "private-a"
       gateway = "private-a" 
     }
-    route_table2 {
+    route_table2 = {
       name = "private-b"
       gateway = "private-b" 
     }
-    route_table3 {
+    route_table3 = {
       name = "public-a"
       gateway = "internet-default" 
     }
-    route_table4 {
+    route_table4 = {
       name = "public-b"
       gateway = "internet-default" 
     }    
