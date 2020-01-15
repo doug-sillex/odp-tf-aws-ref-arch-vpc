@@ -4,7 +4,7 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
-variable "project" {
+variable "project_name" {
   type = string
   description = "Project name"
   default = "vpc-example"

@@ -4,7 +4,7 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
-variable "project" {
+variable "project_name" {
   type = string
   description = "Project name"
   default = "vpc-example"
@@ -39,6 +39,6 @@ variable "nat_gateways" {
    
 
 variable "route_tables" {
-  description = "Route tables"
+  description = "Route T"
   default = {}
 }   
