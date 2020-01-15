@@ -3,7 +3,7 @@ provider "aws" {}
 
 
 module "vpc" {
-  source = "../../"
+  source = "../"
 
   vpc_name = "${var.project_name}-${var.appenv}"
   default_cidr = "10.0.0.0/16"
