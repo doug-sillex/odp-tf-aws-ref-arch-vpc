@@ -2,6 +2,8 @@ provider "aws" {
   region     = var.aws_region
 }
 
+
+
 #Create the VPC
 
 resource "aws_vpc" "main" {
@@ -84,10 +86,12 @@ resource "aws_subnet" "main" {
   }
 }
 
+
 # Configure NAT Gateways
 
 resource "aws_eip" "nat_gw" {
   for_each = var.nat_gateways
+
   vpc      = true
   tags = {
     Name = each.value["name"]
@@ -102,7 +106,8 @@ resource "aws_nat_gateway" "nat_gw" {
   for_each = var.nat_gateways
 
   allocation_id = aws_eip.nat_gw[each.key].id
-  subnet_id     = each.value["subnet"]
+  #Assign the subnet ID based on the subnet assigned to the nat gateway.
+  subnet_id     = aws_subnet.main[each.value["subnet"]].id
 
   tags = {
     Name = each.value["name"]
