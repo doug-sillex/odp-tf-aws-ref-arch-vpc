@@ -44,7 +44,7 @@ variable "subnets" {
 
 variable "nat_gateways" {
   type = map
-  decription "Map of nat gateways"
+  description "Map of nat gateways"
   default = {
     nat-gateway-1 = { 
       name = "private-a"
