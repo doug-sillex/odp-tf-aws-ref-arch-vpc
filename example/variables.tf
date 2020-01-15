@@ -27,17 +27,18 @@ variable "default_cidr" {
 
 variable "subnets" {
   type = map
-  description "Map of subnets"
+  description = "Map of subnets"
   default =  {}
 }    
 
 variable "nat_gateways" {
-  decription "Map of nat gateways"
+  description = "Map of nat gateways"
   default = {}
   }
 }
    
 
 variable "route_tables" {
+  description = "Route tables"
   default = {}
 }   
