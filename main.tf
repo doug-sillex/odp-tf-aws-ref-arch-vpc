@@ -102,7 +102,7 @@ resource "aws_nat_gateway" "nat_gw" {
   for_each = var.nat_gateways
 
   allocation_id = aws_eip.nat_gw[each.key].id
-  subnet_id     = each.subnet
+  subnet_id     = each.value["subnet"]
 
   tags = {
     Name = each.value["name"]
