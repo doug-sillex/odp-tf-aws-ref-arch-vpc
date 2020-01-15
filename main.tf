@@ -70,20 +70,6 @@ resource "aws_route_table" "nat_gateway" {
 
 # Route table to subnet associations
 
-resource "aws_subnet" "main" {
-  vpc_id     = "${aws_vpc.main.id}"
-  for_each = var.subnets
-  cidr_block = each.value["cidr"]
-  availability_zone = each.value["availability_zone"]
-  tags = {
-    Name = each.value["name"]
-    Terraform = "true"
-    Environment = "${var.appenv}"
-    ProjectName = "${var.project_name}"
-  }
-}
-
-
 resource "aws_route_table_association" "main" {
   for_each = var.subnets
   subnet_id      = aws_subnet.main[each.value["subnet"]].id
