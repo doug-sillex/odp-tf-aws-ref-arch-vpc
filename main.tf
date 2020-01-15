@@ -56,7 +56,7 @@ resource "aws_route_table" "routes" {
   for_each = var.route_tables
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = each.value["gateway"]
+    gateway_id = aws_nat_gateway.nat_gw[each.value["gateway"]].id
   }
 
   tags = {
