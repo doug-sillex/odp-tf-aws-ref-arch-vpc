@@ -41,12 +41,7 @@ variable "nat_gateways" {
 }
    
 
-variable "nat_route_tables" {
+variable "route_tables" {
   type = map
-  description = "Route tables pointing to nat gateways"
-}   
-
-variable "internet_route_tables" {
-  type = map
-  description = "Route tables point t0 internet gateway"
+  description = "Route tables"
 }   
