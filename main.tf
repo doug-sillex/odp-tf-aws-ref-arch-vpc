@@ -52,7 +52,7 @@ resource "aws_route_table" "internet_gateway" {
 
 resource "aws_route_table" "nat_gateway" {
   vpc_id = "${aws_vpc.main.id}"
-  for_each = var.nat_route_tables
+  for_each = var.route_tables
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_nat_gateway.nat_gw[each.value["gateway"]].id
