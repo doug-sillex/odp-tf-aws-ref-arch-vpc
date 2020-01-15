@@ -45,8 +45,36 @@ variable "subnets" {
 variable "nat_gateways" {
   type = map
   decription "Map of nat gateways"
-  default = {}
-
-
+  default = {
+    nat-gateway-1 = { 
+      name = "private-a"
+      subnet = "example-vpc-private-a1"
+    },
+    nat-gateway-2 = { 
+      name = "private-b"
+      subnet = "example-vpc-private-a2"
+    }
+  }
 }
    
+
+variable "route_tables" {
+  default = {
+    route_table1 {
+      name = "private-a"
+      gateway = "private-a" 
+    }
+    route_table2 {
+      name = "private-b"
+      gateway = "private-b" 
+    }
+    route_table3 {
+      name = "public-a"
+      gateway = "internet-default" 
+    }
+    route_table4 {
+      name = "public-b"
+      gateway = "internet-default" 
+    }    
+  }
+}   

@@ -6,38 +6,38 @@ module "vpc" {
   default_cidr = "10.0.0.0/16"
 
   subnets = {
-    subnet1 = { 
+    subnet-1 = { 
       name =  "${var.project_name}-private-a1"
       cidr =  "10.0.1.0/24"
       availability_zone = "${var.aws_region}a"
-      route_table = ""
+      route_table = "${var.project_name}-${var.aws_region}a"
     },
-    subnet2 = { 
+    subnet-2 = { 
       name =  "${var.project_name}-private-a2"
       cidr =  "10.0.2.0/24"
       availability_zone = "${var.aws_region}a"
-      route_table = ""
+      route_table = "${var.project_name}-${var.aws_region}a"
     },
-    subnet2 = { 
+    subnet-3 = { 
       name =  "${var.project_name}-private-b1"
       cidr =  "10.0.3.0/24/24"
       availability_zone = "${var.aws_region}b"
       route_table = ""
     },
-    subnet4 = { 
+    subnet-4 = { 
       name =  "${var.project_name}-private-b2"
       cidr =  "10.0.4.0/24"
       availability_zone = "${var.aws_region}b"
       gateway = "nat-${var.project_name}-${var.aws_region}b" 
-      route_table = ""
+      route_table = "${var.project_name}-${var.aws_region}b"
     },    
-    subnet5 = { 
+    subnet-5 = { 
       name =  "${var.project_name}-public-a"
       cidr =  "10.0.101.0/24"
       availability_zone = "${var.aws_region}a"
       route_table = ""
     },
-    subnet6 = { 
+    subnet-6 = { 
       name =  "${var.project_name}-public-b"
       cidr =  "10.0.102.0/24"
       availability_zone = "${var.aws_region}b"
@@ -46,11 +46,11 @@ module "vpc" {
   }
 
   nat_gateways = {
-    nat-gateway_1 = { 
+    nat-gateway-1 = { 
       name = "nat-${var.project_name}-${var.aws_region}a"
       subnet = "${var.project_name}-public-a"
     },
-    nat-gateway_2 = { 
+    nat-gateway-2 = { 
       name = "nat-${var.project_name}-${var.aws_region}b"
       subnet = "${var.project_name}-public-b"
     }
