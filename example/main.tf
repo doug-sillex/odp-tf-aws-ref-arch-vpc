@@ -51,11 +51,11 @@ module "vpc" {
   nat_gateways = {
     nat-gateway-a = { 
       name = "nat-${var.project_name}-${var.aws_region}a"
-      subnet = "subnet-5"
+      subnet = "public-1"
     },
     nat-gateway-b = { 
       name = "nat-${var.project_name}-${var.aws_region}b"
-      subnet = "subnet-6"
+      subnet = "public-2"
     }
   }
 
@@ -66,7 +66,7 @@ module "vpc" {
     }
     route-table-b = {
       name = "${var.project_name}-${var.aws_region}b"
-      gateway = "nat-gateway-a"
+      gateway = "nat-gateway-b"
     }    
   }
 
