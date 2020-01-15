@@ -23,7 +23,7 @@ module "vpc" {
     },
     subnet-3 = { 
       name =  "${var.project_name}-private-b1"
-      cidr =  "10.0.3.0/24/24"
+      cidr =  "10.0.3.0/24"
       availability_zone = "${var.aws_region}b"
       route_table = ""
     },
