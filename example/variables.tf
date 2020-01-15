@@ -10,12 +10,6 @@ variable "project_name" {
   default = "vpc-example"
 }
 
-variable "vpc_name" {
-  type = string
-  description = "Project name"
-  default = "vpc-example"
-}
-
 variable "appenv" {
   type = string
   description = "Environment for deployment."
@@ -43,6 +37,6 @@ variable "nat_gateways" {
    
 
 variable "route_tables" {
-  description = "Route T"
+  description = "Route Tables"
   default = {}
 }   

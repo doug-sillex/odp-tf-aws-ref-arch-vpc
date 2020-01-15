@@ -35,24 +35,24 @@ resource "aws_internet_gateway" "main" {
 
 ## Default route table
 
-resource "aws_route_table" "default" {
+resource "aws_route_table" "internet_gateway" {
   vpc_id = "${aws_vpc.main.id}"
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = "${aws_internet_gateway.main.id}"
+    gateway_id = aws_internet_gateway.main.id
   }
 
   tags = {
-    Name = ${var.project_name}-internet-gateway"
+    Name = "${var.project_name}-internet-gateway" 
     Terraform = "true"
     Environment = "${var.appenv}"
     ProjectName = "${var.project_name}"     
   }
 }
 
-resource "aws_route_table" "routes" {
+resource "aws_route_table" "nat_gateway" {
   vpc_id = "${aws_vpc.main.id}"
-  for_each = var.route_tables
+  for_each = var.nat_route_tables
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_nat_gateway.nat_gw[each.value["gateway"]].id
