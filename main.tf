@@ -2,8 +2,6 @@ provider "aws" {
   region     = var.aws_region
 }
 
-
-
 #Create the VPC
 
 resource "aws_vpc" "main" {
@@ -50,6 +48,7 @@ resource "aws_route_table" "internet_gateway" {
   }
 }
 
+
 resource "aws_route_table" "nat_gateway" {
   vpc_id = "${aws_vpc.main.id}"
   for_each = var.route_tables
@@ -66,9 +65,30 @@ resource "aws_route_table" "nat_gateway" {
   }
 }
 
+
+
+
 # Route table to subnet associations
 
-## MISSING :)
+resource "aws_subnet" "main" {
+  vpc_id     = "${aws_vpc.main.id}"
+  for_each = var.subnets
+  cidr_block = each.value["cidr"]
+  availability_zone = each.value["availability_zone"]
+  tags = {
+    Name = each.value["name"]
+    Terraform = "true"
+    Environment = "${var.appenv}"
+    ProjectName = "${var.project_name}"
+  }
+}
+
+
+resource "aws_route_table_association" "main" {
+  for_each = var.subnets
+  subnet_id      = aws_subnet.main[each.value["subnet"]].id
+  route_table_id = each.value["route_table"] != "internet-gateway" ? aws_route_table.nat_gateway["route_table"].id : aws_route_table.internet_gateway.id
+}
 
 # Configure Subnets
 

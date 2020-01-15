@@ -13,26 +13,26 @@ module "vpc" {
       name =  "${var.project_name}-private-a1"
       cidr =  "10.0.1.0/24"
       availability_zone = "${var.aws_region}a"
-      route_table = "${var.project_name}-${var.aws_region}a"
+      route_table = "route-table-a"
     },
     private-2 = { 
       name =  "${var.project_name}-private-a2"
       cidr =  "10.0.2.0/24"
       availability_zone = "${var.aws_region}a"
-      route_table = "${var.project_name}-${var.aws_region}a"
+      route_table = "route-table-a"
     },
     private-3 = { 
       name =  "${var.project_name}-private-b1"
       cidr =  "10.0.3.0/24"
       availability_zone = "${var.aws_region}b"
-      route_table = ""
+      route_table = "route-table-b"
     },
     private-4 = { 
       name =  "${var.project_name}-private-b2"
       cidr =  "10.0.4.0/24"
       availability_zone = "${var.aws_region}b"
       gateway = "nat-${var.project_name}-${var.aws_region}b" 
-      route_table = "${var.project_name}-${var.aws_region}b"
+      route_table = "route-table-b"
     },    
     public-1 = { 
       name =  "${var.project_name}-public-a"
@@ -69,6 +69,8 @@ module "vpc" {
       gateway = "nat-gateway-b"
     }    
   }
+
+
 
 
 }
