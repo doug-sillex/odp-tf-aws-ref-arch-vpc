@@ -33,18 +33,6 @@ module "vpc" {
       availability_zone = "${var.aws_region}b"
       gateway = "nat-${var.project_name}-${var.aws_region}b" 
       route_table = "route-table-b"
-    },    
-    public-1 = { 
-      name =  "${var.project_name}-public-a"
-      cidr =  "10.0.101.0/24"
-      availability_zone = "${var.aws_region}a"
-      route_table = ""
-    },
-    public-2 = { 
-      name =  "${var.project_name}-public-b"
-      cidr =  "10.0.102.0/24"
-      availability_zone = "${var.aws_region}b"
-      route_table = ""
     }
   }
 
