@@ -60,11 +60,11 @@ module "vpc" {
   }
 
   route_tables = {
-    route-table-1 {
+    route-table-1 = {
       name = "${var.project_name}-${var.aws_region}a"
       gateway = "nat-${var.project_name}-${var.aws_region}a"
     }
-    route-table-2 {
+    route-table-2 = {
       name = "${var.project_name}-${var.aws_region}b"
       gateway = "nat-${var.project_name}-${var.aws_region}b"
     }    
