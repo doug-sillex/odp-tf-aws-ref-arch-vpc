@@ -37,14 +37,13 @@ resource "aws_internet_gateway" "main" {
 
 resource "aws_route_table" "default" {
   vpc_id = "${aws_vpc.main.id}"
-  for_each = var.subnets
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.main.id}"
   }
 
   tags = {
-    Name = each.value["name"]
+    Name = ${var.project_name}-internet-gateway"
     Terraform = "true"
     Environment = "${var.appenv}"
     ProjectName = "${var.project_name}"     
