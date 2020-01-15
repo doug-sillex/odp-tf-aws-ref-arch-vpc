@@ -1,3 +1,23 @@
+variable "aws_region" {
+  type = string
+  description = "Default region used by some modules"
+  default = "us-east-1"
+}
+
+variable "project" {
+  type = string
+  description = "Project name"
+  default = "vpc-example"
+}
+
+
+variable "appenv" {
+  type = string
+  description = "Environment for deployment."
+  default = "test"
+
+}
+
 variable "default_cidr" {
   type = string
   description = "Default subnet in CIDR notation."
@@ -29,3 +49,4 @@ variable "nat_gateways" {
 
 
 }
+   
