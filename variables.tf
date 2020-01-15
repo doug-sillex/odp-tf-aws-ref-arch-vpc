@@ -27,7 +27,7 @@ variable "default_cidr" {
 
 variable "subnets" {
   type = map
-  description "Map of subnets"
+  description = "Map of subnets"
   default =  {
     subnet1 = { 
       name =  "example-vpc-private-a1"
@@ -44,7 +44,7 @@ variable "subnets" {
 
 variable "nat_gateways" {
   type = map
-  description "Map of nat gateways"
+  description = "Map of nat gateways"
   default = {
     nat-gateway-1 = { 
       name = "private-a"
@@ -59,6 +59,7 @@ variable "nat_gateways" {
    
 
 variable "route_tables" {
+  description = "Route tables"
   default = {
     route_table1 {
       name = "private-a"
