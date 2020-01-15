@@ -39,7 +39,6 @@ variable "subnets" {
 variable "nat_gateways" {
   description = "Map of nat gateways"
   default = {}
-  }
 }
    
 
