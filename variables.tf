@@ -44,5 +44,4 @@ variable "nat_gateways" {
 variable "route_tables" {
   type = map
   description = "Route tables"
-  }
 }   
