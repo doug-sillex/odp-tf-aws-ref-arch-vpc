@@ -33,17 +33,29 @@ module "vpc" {
       availability_zone = "${var.aws_region}b"
       gateway = "nat-${var.project_name}-${var.aws_region}b" 
       route_table = "route-table-b"
+    },    
+    public-1 = { 
+      name =  "${var.project_name}-public-a"
+      cidr =  "10.0.101.0/24"
+      availability_zone = "${var.aws_region}a"
+      route_table = "route-table-internet"
+    },
+    public-2 = { 
+      name =  "${var.project_name}-public-b"
+      cidr =  "10.0.102.0/24"
+      availability_zone = "${var.aws_region}b"
+      route_table = "route-table-internet"
     }
   }
 
   nat_gateways = {
     nat-gateway-a = { 
       name = "nat-${var.project_name}-${var.aws_region}a"
-      subnet = "private-4"
+      subnet = "public-1"
     },
     nat-gateway-b = { 
       name = "nat-${var.project_name}-${var.aws_region}b"
-      subnet = "private-3"
+      subnet = "public-2"
     }
   }
 
@@ -56,6 +68,10 @@ module "vpc" {
       name = "${var.project_name}-${var.aws_region}b"
       gateway = "nat-gateway-b"
     }    
+    route-table-internet = {
+      name = "${var.project_name}-internet"
+      gateway = "internet"
+    }        
   }
 
 

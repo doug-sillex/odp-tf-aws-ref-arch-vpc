@@ -31,30 +31,13 @@ resource "aws_internet_gateway" "main" {
 
 # Configure Route Tables
 
-## Default route table
 
-resource "aws_route_table" "internet_gateway" {
-  vpc_id = "${aws_vpc.main.id}"
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.main.id
-  }
-
-  tags = {
-    Name = "${var.project_name}-internet-gateway" 
-    Terraform = "true"
-    Environment = "${var.appenv}"
-    ProjectName = "${var.project_name}"     
-  }
-}
-
-
-resource "aws_route_table" "nat_gateway" {
+resource "aws_route_table" "main" {
   vpc_id = "${aws_vpc.main.id}"
   for_each = var.route_tables
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.nat_gw[each.value["gateway"]].id
+    gateway_id =  each.value["gateway"] != "internet" ? aws_internet_gateway.main.id : aws_nat_gateway.nat_gw[each.value["gateway"]].id
   }
 
   tags = {
@@ -65,15 +48,12 @@ resource "aws_route_table" "nat_gateway" {
   }
 }
 
-
-
-
 # Route table to subnet associations
 
 resource "aws_route_table_association" "main" {
   for_each = var.subnets
   subnet_id      = aws_subnet.main[each.key].id
-  route_table_id = aws_route_table.nat_gateway[each.value["route_table"]].id != "" ? aws_route_table.nat_gateway[each.value["route_table"]].id : aws_route_table.internet_gateway.id
+  route_table_id = aws_route_table.main[each.value["route_table"]].id
 }
 
 # Configure Subnets
