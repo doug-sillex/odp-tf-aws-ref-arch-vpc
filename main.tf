@@ -28,7 +28,7 @@ resource "aws_internet_gateway" "main" {
 # Configure Route Tables
 
 
-resource "aws_route_table" "nat_gw" {
+resource "aws_route_table" "main" {
   vpc_id = "${aws_vpc.main.id}"
   for_each = var.route_tables
   route {
