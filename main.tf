@@ -66,13 +66,61 @@ resource "aws_route_table" "nat_gw_b" {
   }
 }
 
+resource "aws_route_table" "internet_gw" {
+  vpc_id = "${aws_vpc.main.id}"
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.main.id 
+  }
+
+  tags = {
+    Name = "${var.project_name}-internet-gw"
+    Terraform = "true"
+    Environment = "${var.appenv}"
+    ProjectName = "${var.project_name}"    
+    FismaID = "${var.fisma_id}"     
+  }
+}
+
+
+
 # Route table to subnet associations
 
-#resource "aws_route_table_association" "main" {
-#  for_each = var.subnets
-#  subnet_id      = aws_subnet.main[each.key].id
-#  route_table_id = aws_route_table.main[each.value["route_table"]].id
-#}
+## Private Subnets
+
+resource "aws_route_table_association" "private_1_a" {
+  subnet_id      = aws_subnet.private_1_a.id
+  route_table_id = aws_route_table.nat_gw_a.id
+}
+
+resource "aws_route_table_association" "private_1_b" {
+  subnet_id      = aws_subnet.private_1_b.id
+  route_table_id = aws_route_table.nat_gw_b.id
+}
+
+resource "aws_route_table_association" "private_2_a" {
+  subnet_id      = aws_subnet.private_2_a.id
+  route_table_id = aws_route_table.nat_gw_a.id
+}
+
+resource "aws_route_table_association" "private_2_b" {
+  subnet_id      = aws_subnet.private_2_b.id
+  route_table_id = aws_route_table.nat_gw_b.id
+}
+
+## Public Subnets
+
+resource "aws_route_table_association" "public_1_a" {
+  subnet_id      = aws_subnet.public_1_a.id
+  route_table_id = aws_route_table.internet_gw.id
+}
+
+resource "aws_route_table_association" "public_1_b" {
+  subnet_id      = aws_subnet.public_1_b.id
+  route_table_id = aws_route_table.internet_gw.id
+}
+
 
 # Configure Subnets
 
@@ -130,6 +178,8 @@ resource "aws_subnet" "private_2_b" {
   }
 }
 
+
+
 ## Public Subnets
 
 resource "aws_subnet" "public_1_a" {
@@ -186,7 +236,7 @@ resource "aws_nat_gateway" "nat_gw_a" {
 
   allocation_id = aws_eip.nat_gw_a.id
   #Assign the subnet ID based on the subnet assigned to the nat gateway.
-  subnet_id     = aws_subnet.public_1_a.id
+  subnet_id = aws_subnet.public_1_a.id
   tags = {
     Name = "${var.project_name}-nat-gw-a"
     Terraform = "true"
@@ -201,7 +251,7 @@ resource "aws_nat_gateway" "nat_gw_b" {
 
   allocation_id = aws_eip.nat_gw_b.id
   #Assign the subnet ID based on the subnet assigned to the nat gateway.
-  subnet_id     = aws_subnet.main[each.value["subnet"]].id
+  subnet_id = aws_subnet.public_1_b.id
 
   tags = {
     Name = "${var.project_name}-nat-gw-b"
