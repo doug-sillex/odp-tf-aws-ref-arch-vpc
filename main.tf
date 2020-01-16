@@ -187,7 +187,7 @@ resource "aws_subnet" "public_1_a" {
   cidr_block = "10.0.101.0/24"
   availability_zone = "${var.aws_region}a"
   tags = {
-    Name = "${var.project_name}-private-1-a"
+    Name = "${var.project_name}-public-1-a"
     Terraform = "true"
     Environment = "${var.appenv}"
     ProjectName = "${var.project_name}"
@@ -200,7 +200,7 @@ resource "aws_subnet" "public_1_b" {
   cidr_block = "10.0.102.0/24"
   availability_zone = "${var.aws_region}b"
   tags = {
-    Name = "${var.project_name}-private-1-b"
+    Name = "${var.project_name}-public-1-b"
     Terraform = "true"
     Environment = "${var.appenv}"
     ProjectName = "${var.project_name}"
