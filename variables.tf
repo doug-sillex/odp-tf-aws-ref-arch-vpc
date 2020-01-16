@@ -29,6 +29,11 @@ variable "default_cidr" {
   default = "10.0.0.0/16"
 }
 
+variable "fisma_id" {
+  type = string
+  description = "FismaID resources are associated with."
+  default "XXXXX"
+}
 
 variable "subnets" {
   type = map
