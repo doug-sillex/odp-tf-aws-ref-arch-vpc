@@ -1,3 +1,7 @@
+provider "aws" {
+  region     = var.aws_region
+}
+
 #Create the VPC
 
 resource "aws_vpc" "main" {
@@ -28,12 +32,13 @@ resource "aws_internet_gateway" "main" {
 # Configure Route Tables
 
 
-resource "aws_route_table" "main" {
+resource "aws_route_table" "nat_gw" {
   vpc_id = "${aws_vpc.main.id}"
   for_each = var.route_tables
+  [for key value in var.route_tables : value if value["gateway"] != "internet"]
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id =  aws_nat_gateway.nat_gw[each.value["gateway"]].id != "" ? aws_nat_gateway.nat_gw[each.value["gateway"]].id : aws_internet_gateway.main.id
+    gateway_id =  aws_nat_gateway.nat_gw[each.value["gateway"]].id # aws_internet_gateway.main.id
   }
 
   tags = {
