@@ -28,7 +28,7 @@ resource "aws_internet_gateway" "main" {
 # Configure Route Tables
 
 
-resource "aws_route_table" "nat_gateway" {
+resource "aws_route_table" "main" {
   vpc_id = "${aws_vpc.main.id}"
   nat_gateways = { for s in var.route_tables : s => s if s["gateway"] != "internet" }
 
