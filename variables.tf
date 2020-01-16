@@ -35,18 +35,3 @@ variable "fisma_id" {
   default "XXXXX"
 }
 
-variable "subnets" {
-  type = map
-  description = "Map of subnets"
-}    
-
-variable "nat_gateways" {
-  type = map
-  description = "Map of nat gateways"
-}
-   
-
-variable "route_tables" {
-  type = map
-  description = "Route tables"
-}   

@@ -23,20 +23,8 @@ variable "default_cidr" {
   default = "10.0.0.0/16"
 }
 
-
-variable "subnets" {
-  type = map
-  description = "Map of subnets"
-  default =  {}
-}    
-
-variable "nat_gateways" {
-  description = "Map of nat gateways"
-  default = {}
+variable "fisma_id" {
+  type = string
+  description = "FismaID resources are associated with."
+  default "XXXXX"
 }
-   
-
-variable "route_tables" {
-  description = "Route Tables"
-  default = {}
-}   
