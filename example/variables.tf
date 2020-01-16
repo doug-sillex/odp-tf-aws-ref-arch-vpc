@@ -26,5 +26,5 @@ variable "default_cidr" {
 variable "fisma_id" {
   type = string
   description = "FismaID resources are associated with."
-  default "XXXXX"
+  default = "XXXXX"
 }
