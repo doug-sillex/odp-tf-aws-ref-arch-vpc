@@ -28,9 +28,13 @@ resource "aws_internet_gateway" "main" {
 # Configure Route Tables
 
 
-resource "aws_route_table" "main" {
+resource "aws_route_table" "nat_gateway" {
   vpc_id = "${aws_vpc.main.id}"
-  for_each = var.route_tables
+  nat_gateways = { for s in var.route_tables : s if s["gateway"] != "internet" }
+
+  for_each = nat_gateways
+  
+  #for_each = var.route_tables
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id =  aws_nat_gateway.nat_gw[each.value["gateway"]].id # aws_internet_gateway.main.id
