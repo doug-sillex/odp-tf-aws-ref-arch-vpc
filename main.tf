@@ -30,7 +30,7 @@ resource "aws_internet_gateway" "main" {
 
 resource "aws_route_table" "nat_gateway" {
   vpc_id = "${aws_vpc.main.id}"
-  nat_gateways = { for s in var.route_tables : s if s["gateway"] != "internet" }
+  nat_gateways = { for s in var.route_tables  }
 
   for_each = nat_gateways
   
