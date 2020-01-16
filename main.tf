@@ -34,7 +34,7 @@ resource "aws_internet_gateway" "main" {
 
 resource "aws_route_table" "nat_gw" {
   vpc_id = "${aws_vpc.main.id}"
-  for_each = var.route_tables
+  #for_each = var.route_tables
   [for key value in var.route_tables : value if value["gateway"] != "internet"]
   route {
     cidr_block = "0.0.0.0/0"
