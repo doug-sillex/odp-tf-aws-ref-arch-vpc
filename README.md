@@ -97,7 +97,7 @@ module "vpc" {
 *** Note: All resources will be named with a prefix of the value of the `project_name` variable to make it easier to find resources deployed using this module. ***
 
 VPC
-* Route Tables
+* Route Tables 
 * Nat Gateways
   * 1 Nat Gateway in Public Subnet in AZ a of desired region
     * 1 Elastic IP
