@@ -8,7 +8,6 @@ module "vpc" {
   project_name = "${var.project_name}"
   appenv = "${var.appenv}"
   vpc_name = "${var.project_name}-${var.appenv}"
-  default_cidr = "10.0.0.0/16"
   fisma_id = "${var.fisma_id}"
   default_cidr = "${var.default_cidr}"
   private_1_a  = "${var.private_1_a}" 
