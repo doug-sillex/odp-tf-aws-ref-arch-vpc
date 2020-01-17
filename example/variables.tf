@@ -32,37 +32,37 @@ variable "default_cidr" {
   default = "10.0.0.0/16"
 }
 
-variable "private_1_a" {
+variable "private_1_a_cidr" {
   type = string
   description = "CIDR Block for Private subnet"
   default = "10.0.1.0/24"
 }
 
-variable "private_1_b" {
+variable "private_1_b_cidr" {
   type = string
   description = "CIDR Block for Private subnet"
   default = "10.0.2.0/24"
 }
 
-variable "private_2_a" {
+variable "private_2_a_cidr" {
   type = string
   description = "CIDR Block for Private subnet"
   default = "10.0.3.0/24"
 }
 
-variable "private_2_b" {
+variable "private_2_b_cidr" {
   type = string
   description = "CIDR Block for Private subnet"
   default = "10.0.4.0/24"
 }
 
-variable "public_1_a" {
+variable "public_1_a_cidr" {
   type = string
   description = "CIDR Block for Public subnet"
   default = "10.0.101.0/24"
 }
 
-variable "public_1_b" {
+variable "public_1_b_cidr" {
   type = string
   description = "CIDR Block for Public subnet"
   default = "10.0.102.0/24"
