@@ -23,15 +23,50 @@ variable "appenv" {
 
 }
 
+
+variable "fisma_id" {
+  type = string
+  description = "FismaID resources are associated with."
+  default = "XXXXX"
+}
+
+
+
+# CIDR blocks for subnets
+
 variable "default_cidr" {
   type = string
   description = "Default subnet in CIDR notation."
   default = "10.0.0.0/16"
 }
 
-variable "fisma_id" {
+variable "private_1_a" {
   type = string
-  description = "FismaID resources are associated with."
-  default = "XXXXX"
+  description = "CIDR Block for Private subnet"
+}
+
+variable "private_1_b" {
+  type = string
+  description = "CIDR Block for Private subnet"
+}
+
+variable "private_2_a" {
+  type = string
+  description = "CIDR Block for Private subnet"
+}
+
+variable "private_2_b" {
+  type = string
+  description = "CIDR Block for Private subnet"
+}
+
+variable "public_1_a" {
+  type = string
+  description = "CIDR Block for Public subnet"
+}
+
+variable "public_1_b" {
+  type = string
+  description = "CIDR Block for Public subnet"
 }
 
