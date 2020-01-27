@@ -2,7 +2,7 @@
 
 resource "aws_vpc" "main" {
   cidr_block       = "${var.default_cidr}"
-  instance_tenancy = "dedicated"
+  instance_tenancy = "default"
 
   tags = {
     Name = "${var.vpc_name}"
