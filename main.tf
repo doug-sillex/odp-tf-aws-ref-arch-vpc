@@ -32,39 +32,6 @@ resource "aws_internet_gateway" "main" {
 
 ## Route Tables for Nat Gateways
 
-resource "aws_route_table" "nat_gw_a" {
-  vpc_id = "${aws_vpc.main.id}"
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.nat_gw_a.id 
-  }
-
-  tags = {
-    Name = "${var.project_name}-nat-gw-a"
-    Terraform = "true"
-    Environment = "${var.appenv}"
-    ProjectName = "${var.project_name}"    
-    FismaID = "${var.fisma_id}"     
-  }
-}
-
-resource "aws_route_table" "nat_gw_b" {
-  vpc_id = "${aws_vpc.main.id}"
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.nat_gw_b.id 
-  }
-
-  tags = {
-    Name = "${var.project_name}-nat-gw-b"
-    Terraform = "true"
-    Environment = "${var.appenv}"
-    ProjectName = "${var.project_name}"    
-    FismaID = "${var.fisma_id}"     
-  }
-}
 
 resource "aws_route_table" "internet_gw" {
   vpc_id = "${aws_vpc.main.id}"
@@ -208,56 +175,3 @@ resource "aws_subnet" "public_1_b" {
   }
 }
 
-# Configure NAT Gateways
-
-resource "aws_eip" "nat_gw_a" {
-  vpc      = true
-  tags = {
-    Name = "${var.project_name}-nat-gw-a"
-    Terraform = "true"
-    Environment = "${var.appenv}"
-    ProjectName = "${var.project_name}"
-    FismaID = "${var.fisma_id}"
-  }  
-}
-
-resource "aws_eip" "nat_gw_b" {
-  vpc      = true
-  tags = {
-    Name = "${var.project_name}-nat-gw-b"
-    Terraform = "true"
-    Environment = "${var.appenv}"
-    ProjectName = "${var.project_name}"
-    FismaID = "${var.fisma_id}"
-  }  
-}
-
-resource "aws_nat_gateway" "nat_gw_a" {
-
-  allocation_id = aws_eip.nat_gw_a.id
-  #Assign the subnet ID based on the subnet assigned to the nat gateway.
-  subnet_id = aws_subnet.public_1_a.id
-  tags = {
-    Name = "${var.project_name}-nat-gw-a"
-    Terraform = "true"
-    Environment = "${var.appenv}"
-    ProjectName = "${var.project_name}"
-    FismaID = "${var.fisma_id}"    
-  }
-}
-
-
-resource "aws_nat_gateway" "nat_gw_b" {
-
-  allocation_id = aws_eip.nat_gw_b.id
-  #Assign the subnet ID based on the subnet assigned to the nat gateway.
-  subnet_id = aws_subnet.public_1_b.id
-
-  tags = {
-    Name = "${var.project_name}-nat-gw-b"
-    Terraform = "true"
-    Environment = "${var.appenv}"
-    ProjectName = "${var.project_name}"
-    FismaID = "${var.fisma_id}"    
-  }
-}
