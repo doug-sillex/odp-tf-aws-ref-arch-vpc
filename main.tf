@@ -54,27 +54,7 @@ resource "aws_route_table" "internet_gw" {
 
 # Route table to subnet associations
 
-## Private Subnets
 
-resource "aws_route_table_association" "private_1_a" {
-  subnet_id      = aws_subnet.private_1_a.id
-  route_table_id = aws_route_table.nat_gw_a.id
-}
-
-resource "aws_route_table_association" "private_1_b" {
-  subnet_id      = aws_subnet.private_1_b.id
-  route_table_id = aws_route_table.nat_gw_b.id
-}
-
-resource "aws_route_table_association" "private_2_a" {
-  subnet_id      = aws_subnet.private_2_a.id
-  route_table_id = aws_route_table.nat_gw_a.id
-}
-
-resource "aws_route_table_association" "private_2_b" {
-  subnet_id      = aws_subnet.private_2_b.id
-  route_table_id = aws_route_table.nat_gw_b.id
-}
 
 ## Public Subnets
 
